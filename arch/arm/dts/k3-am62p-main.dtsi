@@ -42,6 +42,7 @@
 
 	main_conf: bus@100000 {
 		compatible = "simple-bus";
+		bootph-pre-ram;
 		reg = <0x00 0x00100000 0x00 0x20000>;
 		#address-cells = <1>;
 		#size-cells = <1>;
