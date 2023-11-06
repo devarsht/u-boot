@@ -22,9 +22,8 @@
 #include <net.h>
 #include <asm/gpio.h>
 #include <cpu_func.h>
-
 #include <linux/sizes.h>
-
+#include <fdt_simplefb.h>
 #include "../common/board_detect.h"
 
 DECLARE_GLOBAL_DATA_PTR;
@@ -468,6 +467,16 @@ int board_late_init(void)
 			probe_daughtercards();
 #endif
 	}
+
+	return 0;
+}
+#endif
+
+#if defined(CONFIG_OF_BOARD_SETUP)
+int ft_board_setup(void *blob, struct bd_info *bd)
+{
+	if (IS_ENABLED(CONFIG_FDT_SIMPLEFB))
+		fdt_simplefb_enable_and_mem_rsv(blob);
 
 	return 0;
 }
