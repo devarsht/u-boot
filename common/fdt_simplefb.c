@@ -12,6 +12,7 @@
 #include <asm/global_data.h>
 #include <linux/libfdt.h>
 #include <video.h>
+#include <spl.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -87,10 +88,24 @@ int fdt_simplefb_enable_and_mem_rsv(void *blob)
 {
 	struct fdt_memory mem;
 	int ret;
+	bool pre_reserved_fb = false;
 
-	/* nothing to do when video is not active */
-	if (!video_is_active())
+	if (IS_ENABLED(CONFIG_SPL_VIDEO) && spl_phase() > PHASE_SPL &&
+	    CONFIG_IS_ENABLED(BLOBLIST)) {
+		if (gd->fb_base && gd->video_top && gd->video_bottom) {
+			debug("Pre-reserved framebuffer found\n");
+			pre_reserved_fb = true;
+		}
+	}
+
+	/*
+	 * Nothing to do when video is not active
+	 * at u-boot proper and was also not enabled
+	 * at SPL stage.
+	 */
+	if (!video_is_active() && !pre_reserved_fb) {
 		return 0;
+	}
 
 	ret = fdt_simplefb_enable_existing_node(blob);
 	if (ret)
