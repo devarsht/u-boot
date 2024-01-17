@@ -5,7 +5,7 @@
  * Copyright (C) 2018 Texas Instruments Incorporated - http://www.ti.com/
  *	Lokesh Vutla <lokeshvutla@ti.com>
  */
-
+#define DEBUG
 #include <common.h>
 #include <cpu_func.h>
 #include <image.h>

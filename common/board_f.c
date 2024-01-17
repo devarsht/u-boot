@@ -8,7 +8,7 @@
  * Sysgo Real-Time Solutions, GmbH <www.elinos.com>
  * Marius Groeger <mgroeger@sysgo.de>
  */
-
+#define DEBUG
 #include <common.h>
 #include <bloblist.h>
 #include <bootstage.h>
@@ -419,7 +419,11 @@ static int reserve_video(void)
 		if (!ho)
 			return log_msg_ret("blf", -ENOENT);
 		video_reserve_from_bloblist(ho);
+		debug("DT:u-boot: gd->relocaddr %08lx, gd->fb_base : %08llx\n",
+		      (gd->relocaddr, gd->fb_base));
 		gd->relocaddr = ho->fb;
+		debug("DT:u-boot: gd->relocaddr %08lx, gd->fb_base : %08llx\n",
+		      (gd->relocaddr, gd->fb_base));
 	} else if (CONFIG_IS_ENABLED(VIDEO)) {
 		ulong addr;
 		int ret;

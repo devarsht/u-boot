@@ -4,7 +4,7 @@
  *
  * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
  */
-
+#define DEBUG
 #include <spl.h>
 #include <asm/io.h>
 #include <asm/arch/hardware.h>
@@ -158,7 +158,7 @@ void board_init_f(ulong dummy)
 	if (ret)
 		panic("DRAM init failed: %d\n", ret);
 #endif
-
+	spl_enable_dcache();
 	debug("am62px_init: %s done\n", __func__);
 }
 

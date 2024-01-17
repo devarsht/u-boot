@@ -2,7 +2,7 @@
 /*
  * Copyright (c) 2015 Google, Inc
  */
-
+#define DEBUG
 #define LOG_CATEGORY UCLASS_VIDEO
 
 #include <common.h>

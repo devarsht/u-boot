@@ -139,6 +139,7 @@ int bmp_display(ulong addr, int x, int y)
 		if (x == BMP_ALIGN_CENTER || y == BMP_ALIGN_CENTER)
 			align = true;
 
+		printf("Displaying bmp at %lx \n", addr);
 		ret = video_bmp_display(dev, addr, x, y, align);
 	}
 

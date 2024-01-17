@@ -2,7 +2,7 @@
 /*
  * Copyright (c) 2015 Google, Inc
  */
-
+#define DEBUG
 #include <common.h>
 #include <bmp_layout.h>
 #include <dm.h>
